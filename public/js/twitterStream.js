@@ -132,6 +132,7 @@ function myFunction() {
       //var socket = io.connect('http://localhost:8081');
       var socket = io.connect(URL);
       socket.emit("start trends", { keyword: "Los Angeles" });
+      socket.emit("start tweets");
     }
 
     else if (y[x].text == 'Chicago') {
@@ -141,6 +142,7 @@ function myFunction() {
       //var socket = io.connect('http://localhost:8081');
       var socket = io.connect(URL);
       socket.emit("start trends", { keyword: "Chicago" });
+      socket.emit("start tweets");
     }
 
     else if (y[x].text == 'Carson') {
