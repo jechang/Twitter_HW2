@@ -30,7 +30,12 @@ var client = new twitter({
 var interval;
 
 //Use the default port (for beanstalk) or default to 8081 locally
-server.listen(process.env.PORT || 8081);
+//server.listen(process.env.PORT || 8081);
+//server.listen(process.env.PORT);
+server.listen(8081);
+
+console.log('process.env.PORT: ' + process.env.PORT);
+
 
 //Setup routing for app
 app.use(express.static(__dirname + '/public'));
@@ -89,13 +94,20 @@ app.post('/', function (req, res) {
 io.sockets.on('connection', function (socket) {
   console.log("Server recieved connection...");
 
-  socket.on("start tweets", function(data) {
+  
+  //socket.on("start tweets", function(data) {
     console.log("Server is starting tweets...");
-
 
     ///*
     // **************** Testing POST ****************
     app.post('/', function (req, res) {
+
+
+
+
+
+
+
       res.send('Got a POST request to add a marker to the map');
       console.log('Got a POST request to add a marker to the map');
       //console.log('Got a POST request with body: ' + JSON.stringify(req.body));
@@ -103,6 +115,7 @@ io.sockets.on('connection', function (socket) {
 
       // http://stackoverflow.com/questions/18484775/how-do-you-access-an-amazon-sns-post-body-with-express-node-js
       var bodyarr = []
+
       req.on('data', function(chunk){
         bodyarr.push(chunk);
       })  
@@ -118,11 +131,17 @@ io.sockets.on('connection', function (socket) {
         var obj2 = JSON.parse(obj.Message);
 
         console.log('Recieved marker with latitude: ' + obj2.lat + ' and longitude: ' + obj2.lon + ' and sentiment: ' + obj2.sentiment);
-        var outputPoint = {"lat": obj2.lat,"lng": obj2.lon, "sentiment": obj2.sentiment};
-        socket.emit('add marker', outputPoint);
+        var outputPoint = {lat: obj2.lat,lng: obj2.lon, sentiment: obj2.sentiment};
+        console.log('outputPoint: ' + JSON.stringify(outputPoint));
+        io.sockets.emit("add:marker", JSON.stringify(outputPoint));
         console.log('Sent marker through socket to plot on UI.');
       })  
+
+
     });
+
+
+  //});
     // **************** Testing POST ****************
     //*/
 
@@ -132,7 +151,7 @@ io.sockets.on('connection', function (socket) {
     //console.log(data);
     //console.log(data.keyword);
 
-    clearInterval(interval);
+    //clearInterval(interval);
     
     //var outputPoint = {"lat": rows[i].latitude,"lng": rows[i].longitude};
     //socket.broadcast.emit("add marker", outputPoint);
@@ -150,8 +169,9 @@ io.sockets.on('connection', function (socket) {
     */
 
   
-  });
+  
 
+  
   socket.on("start trends", function(data) {
     console.log("Server is starting trends with trend keyword: " + data.keyword);
 
@@ -180,12 +200,17 @@ io.sockets.on('connection', function (socket) {
        var str = JSON.stringify(obj);
 
        socket.emit("show trends", str);
+
+       // Troubleshoot (this works!)
+       //socket.emit("add marker", str);
+
     });
 
 
 
   
   });
+  
 
     // Emits signal to the client telling them that the
     // they are connected and can start receiving Tweets
