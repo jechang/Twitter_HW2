@@ -1,0 +1,19 @@
+{
+	"twitter": {
+		"consumer_key": "l5052mEBXWlUUMmPruYA5ZPwU",
+		"consumer_secret": "74zApUjj5GztfJYNbj4KBctB3j3skCirmEoqLilQnKE5e1BuT2",
+		"access_token_key": "3943692555-8ere0NGBIeVIor9fXnbvIry1OyJWk6XrH3rCTtE",
+		"access_token_secret": "i6xFpnDfNArsYTXgrRvZ3VZI6SQtR8NWh14ASGeHDVUfT"
+	},
+
+	"amazon": {
+		"region": "us-west-1",
+		"accessKeyId": "AKIAIGV7M2C4E4ND2QCQ",
+		"secretAccessKey": "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",
+		"QueueUrl": "https://sqs.us-west-1.amazonaws.com/691569146434/twitter"
+	},
+	
+	"alchemy": {
+		"key": "4d3c1344b8e082c893880e886a5935cf39e6e753"
+	}
+}

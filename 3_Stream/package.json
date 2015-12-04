@@ -1,0 +1,19 @@
+
+{
+    "name": "HW2_Twitter_Trends_jc4267",
+    "description": "Twitter Trend Assignment",
+    "version": "0.0.1",
+    "private": true,
+    "dependencies": {
+        "express": "*",
+        "twitter": "*",
+        "socket.io": "*",
+        "mysql": "*",
+        "aws-sdk": "*",
+        "alchemy-api": "*",
+        "async": "*",
+        "body-parser": "*",
+        "nconf": "*",
+        "unirest": "*"
+    }
+}
